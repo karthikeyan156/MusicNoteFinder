@@ -3,6 +3,8 @@ import librosa
 import asyncio
 import os
 
+from services.librosa import extract_musical_notes
+
 app = FastAPI()
 
 @app.post("/process-audio/")
@@ -14,11 +16,12 @@ async def process_audio(file: UploadFile = File(...), description: str = Form(..
     
     # Process audio to get duration
     duration = await get_audio_duration(temp_file)
-    
+    if (description == 'librosa'):
+        notes=extract_musical_notes(temp_file)
+    print(notes)
     # Remove temporary file
     os.remove(temp_file)
-    
-    return {"filename": file.filename, "duration": duration, "lib":description}
+    return {"filename": file.filename, "duration": duration, "lib":description, "notes":notes}
 
 async def get_audio_duration(file_path: str) -> float:
     # Running librosa in a threadpool to prevent blocking
