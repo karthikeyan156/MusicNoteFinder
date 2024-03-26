@@ -2,8 +2,10 @@ from fastapi import FastAPI, File, Form, UploadFile
 import librosa
 import asyncio
 import os
+from services.aubio import extract_musical_notes_aubio
 
-from services.librosa import extract_musical_notes
+from services.librosa import analyze_audio_librosa
+from services.testfile import extract_musical_notes01
 
 app = FastAPI()
 
@@ -17,8 +19,10 @@ async def process_audio(file: UploadFile = File(...), description: str = Form(..
     # Process audio to get duration
     duration = await get_audio_duration(temp_file)
     if (description == 'librosa'):
-        notes=extract_musical_notes(temp_file)
-    print(notes)
+        #notes=extract_musical_notes(temp_file)
+        notes = analyze_audio_librosa(temp_file)
+    if(description == 'aubio'):
+        notes=    extract_musical_notes_aubio(temp_file)
     # Remove temporary file
     os.remove(temp_file)
     return {"filename": file.filename, "duration": duration, "lib":description, "notes":notes}
