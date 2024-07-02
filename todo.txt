@@ -1,0 +1,7 @@
+methods available:
+librosa
+aubio
+soundfile
+bestmix
+allthree
+

@@ -3,10 +3,10 @@ import librosa
 import asyncio
 import os
 from services.aubio import analyze_audio_aubio
-
+from services.soundfile import analyze_audio_soundFile
 from services.librosa import analyze_audio_librosa
 from services.testfile import extract_musical_notes01
-
+from services.bestmix import analyze_audio_file
 app = FastAPI()
 
 @app.post("/process-audio/")
@@ -23,6 +23,10 @@ async def process_audio(file: UploadFile = File(...), description: str = Form(..
         notes = analyze_audio_librosa(temp_file)
     if(description == 'aubio'):
         notes = analyze_audio_aubio(temp_file)
+    if(description == 'soundfile'):
+        notes = analyze_audio_soundFile(temp_file)  
+    if(description == 'best'):
+        notes =  analyze_audio_file(temp_file)     
     else:
         notes ={ "message":"lib not found"}    
     # Remove temporary file

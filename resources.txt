@@ -1,0 +1,24 @@
+1. Librosa Default
+Criteria: High tempo (>120 BPM)
+Reason: librosa.onset.onset_detect uses a default spectral flux onset detection algorithm which is robust for a wide range of audio signals, particularly effective for fast-paced music where beats and rhythmic patterns are prominent.
+Reference: McFee, B., et al. (2015). librosa: Audio and Music Signal Analysis in Python. In Proceedings of the 14th Python in Science Conference (p. 18-24). Link
+2. Librosa Backtrack
+Criteria: High spectral centroid (>3000 Hz)
+Reason: Backtracking helps refine the onset times to align with transient peaks, which is particularly useful for high-pitched sounds and instruments where precise onset timing is crucial.
+Reference: Böck, S., & Widmer, G. (2013). Maximum filter vibrato suppression for onset detection. In Proceedings of the 16th International Conference on Digital Audio Effects (DAFx-13). Link
+3. Librosa Custom
+Criteria: High tempo (>120 BPM) and high spectral centroid (>2500 Hz)
+Reason: Custom parameters like pre_max, post_max, delta, and wait can be fine-tuned to better detect onsets in complex, fast-paced, and high-frequency music tracks, providing more accurate results.
+Reference: McFee, B., et al. (2015). librosa: Audio and Music Signal Analysis in Python. Link
+4. Aubio HFC
+Criteria: Low zero-crossing rate (<0.05)
+Reason: High Frequency Content (HFC) is effective for detecting onsets in signals with clear spectral changes, making it suitable for monophonic signals or instruments with clear attack transients.
+Reference: Bello, J. P., et al. (2005). A tutorial on onset detection in music signals. IEEE Transactions on Speech and Audio Processing, 13(5), 1035-1047. Link
+5. Aubio Complex
+Criteria: General case for more complex audio
+Reason: The complex domain method is versatile and performs well across a variety of signals, balancing between spectral and phase information for accurate onset detection.
+Reference: Dixon, S. (2006). Onset detection revisited. In Proceedings of the 9th International Conference on Digital Audio Effects (DAFx-06), Montreal, Canada. Link
+6. Aubio Energy
+Criteria: Low zero-crossing rate (<0.05) and low spectral centroid (<1500 Hz)
+Reason: Energy-based methods are simple and effective for detecting onsets in monophonic signals with low spectral complexity, such as solo instrumental or vocal tracks.
+Reference: Tzanetakis, G., & Cook, P. (2002). Musical genre classification of audio signals. IEEE Transactions on Speech and Audio Processing, 10(5), 293-302. Link
