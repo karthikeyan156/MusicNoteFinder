@@ -34,7 +34,6 @@ def analyze_audio_aubio(filename):
         if is_onset:
             time = total_frames / float(samplerate)  # Calculate the time of the onset
             note = freq_to_note(pitch)  # Convert frequency to musical note
-            music_data.append({'time': time, 'pitch': str(pitch), 'note': note})
-    print(note)        
+            music_data.append({'time': time, 'pitch': str(pitch), 'note': note})       
     return {"music_data":music_data}     
 
