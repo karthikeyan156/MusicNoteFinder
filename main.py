@@ -21,14 +21,14 @@ async def process_audio(file: UploadFile = File(...), description: str = Form(..
     if (description == 'librosa'):
         #notes=extract_musical_notes(temp_file)
         notes = analyze_audio_librosa(temp_file)
-    if(description == 'aubio'):
+    elif(description == 'aubio'):
         notes = analyze_audio_aubio(temp_file)
-    if(description == 'soundfile'):
+    elif(description == 'soundfile'):
         notes = analyze_audio_soundFile(temp_file)  
-    if(description == 'best'):
-        notes =  analyze_audio_file(temp_file)     
+    elif(description == 'best'):
+        notes =  analyze_audio_file(temp_file)
     else:
-        notes ={ "message":"lib not found"}    
+        notes = {"message":"lib not found"}
     # Remove temporary file
     os.remove(temp_file)
     return {"filename": file.filename, "duration": duration, "lib":description, "notes":notes}
