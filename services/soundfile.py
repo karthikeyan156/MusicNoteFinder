@@ -87,10 +87,6 @@ def analyze_audio_soundFile(filename):
             "pitch": round(pitch, 2),
             "note": note
         })
-    
-    for item in music_data:
-        print(f"Onset: {item['onset']:.2f}s, Offset: {item['offset']:.2f}s, Duration: {item['duration']:.2f}s, Pitch: {item['pitch']} Hz, Note: {item['note']}")
-    
     return {"music_data": music_data}
 
 
