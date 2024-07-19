@@ -22,3 +22,13 @@ This should run the server at http://127.0.0.1:8000
 
 To access the API documentation or to test it use : http://127.0.0.1:8000/docs
 
+To run tests
+create a virtual env and install all req libs and run these commands
+
+```
+source .myenv/bin/activate
+```
+
+```
+ python3 -m unittest discover -s tests
+ ```
